@@ -4,6 +4,7 @@ const conversation = document.getElementById("conversation");
 
 let recognition;
 let listening = false;
+let didReady = false;
 
 // ===== VOICE RECOGNITION =====
 function createRecognition() {
@@ -26,16 +27,16 @@ function createRecognition() {
     const userText = event.results[0][0].transcript;
     addMessage("👩‍🏫 Tu", userText);
     const reply = await askGPT(userText);
-    addMessage("🤖 AI", reply);
 
-    // Trigger D-ID avatar speech
-    if (window.didAgent && window.didAgent.isReady) {
-      window.didAgent.say(reply);
-    } else {
-      console.warn("D-ID agent non pronto ancora.");
-    }
+    // Show one AI message only
+    renderMath(reply);
 
+    // Speak and animate avatar
     speakText(reply);
+    if (didReady && window.didAgent) {
+      try { await window.didAgent.say(reply); }
+      catch (e) { console.warn("Avatar speech error:", e); }
+    }
   };
 
   recog.onend = () => {
@@ -69,7 +70,7 @@ function resetMicStyle() {
   speakBtn.style.boxShadow = '0 0 20px rgba(59,130,246,0.7)';
 }
 
-// ===== ASK GPT THROUGH BACKEND =====
+// ===== ASK GPT =====
 async function askGPT(prompt) {
   try {
     const res = await fetch("/api/ask", {
@@ -79,16 +80,14 @@ async function askGPT(prompt) {
     });
 
     const data = await res.json();
-    const reply = data.reply || "Non ho capito bene.";
-    renderMath(reply);
-    return reply;
+    return data.reply || "Non ho capito bene.";
   } catch (err) {
     console.error(err);
     return "Errore durante la richiesta all'AI.";
   }
 }
 
-// ===== RENDER CHAT MESSAGES =====
+// ===== CHAT RENDERING =====
 function addMessage(speaker, text) {
   const div = document.createElement("div");
   div.className = "message";
@@ -102,18 +101,16 @@ function renderMath(text) {
   div.className = "message";
   div.innerHTML = `<strong>🤖 AI</strong><p>${text}</p>`;
   conversation.appendChild(div);
-
   renderMathInElement(div, {
     delimiters: [
       { left: "$$", right: "$$", display: true },
       { left: "$", right: "$", display: false }
     ]
   });
-
   conversation.scrollTop = conversation.scrollHeight;
 }
 
-// ===== TEXT-TO-SPEECH FALLBACK =====
+// ===== TEXT-TO-SPEECH =====
 function speakText(text) {
   const utter = new SpeechSynthesisUtterance(text);
   utter.lang = "it-IT";
@@ -121,8 +118,8 @@ function speakText(text) {
   window.speechSynthesis.speak(utter);
 }
 
-// ===== WAIT FOR D-ID AGENT =====
+// ===== D-ID READY EVENT =====
 window.addEventListener("didAgentLoaded", () => {
   console.log("✅ D-ID agent pronto!");
-  window.didAgent.isReady = true;
+  didReady = true;
 });
