@@ -5,46 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Insegnante di Matematica</title>
 
-  <!-- KaTeX per formule matematiche -->
+  <!-- KaTeX for LaTeX math -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" />
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
 
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
   <div class="main-container">
+    <!-- LEFT: Avatar -->
     <section class="avatar-section">
-      <!-- D-ID agent container -->
-      <div id="mathTeacherAvatar"></div>
+      <div id="avatarContainer"></div>
     </section>
 
+    <!-- RIGHT: Math chat -->
     <section class="math-section">
       <header>
         <h1>AI Insegnante di Matematica</h1>
         <p>Fai una domanda di matematica e ti spiegherò passo per passo.</p>
       </header>
-
       <div id="conversation" class="conversation"></div>
     </section>
-
-    <div class="voice-controls">
-      <button id="speakBtn" title="Parla con l'AI">🎤</button>
-      <button id="stopBtn" title="Ferma il microfono">⏹️</button>
-    </div>
   </div>
 
-  <!-- ✅ Your real D-ID agent -->
+  <!-- Voice buttons -->
+  <div class="voice-controls">
+    <button id="speakBtn" title="Parla con l'AI">🎤</button>
+    <button id="stopBtn" title="Ferma il microfono">⏹️</button>
+  </div>
+
+  <!-- D-ID avatar embed -->
   <script type="module"
-      src="https://agent.d-id.com/v2/index.js"
-      data-mode="full"
-      data-client-key="YXV0aDB8NjkxNjE4MWJjNWUyZmVmNzU1OTBkZGFkOmx4TlFxOUo2LUJIUWhtc2F3WFpwbQ=="
-      data-agent-id="v2_agt_Yr4DHEpF"
-      data-name="did-agent"
-      data-monitor="true"
-      data-target-id="mathTeacherAvatar">
+          src="https://agent.d-id.com/v2/index.js"
+          data-mode="full"
+          data-client-key="YXV0aDB8NjkxNjE4MWJjNWUyZmVmNzU1OTBkZGFkOmx4TlFxOUo2LUJIUWhtc2F3WFpwbQ=="
+          data-agent-id="v2_agt_Yr4DHEpF"
+          data-name="did-agent"
+          data-monitor="true"
+          data-target-id="avatarContainer">
   </script>
 
+  <!-- Custom JS -->
   <script src="script.js"></script>
 </body>
 </html>
