@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Insegnante di Matematica</title>
 
+  <!-- KaTeX for math formulas -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" />
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
@@ -12,6 +13,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
   <div class="main-container">
     <section class="avatar-section">
       <div id="avatarContainer"></div>
@@ -31,12 +33,15 @@
     <button id="stopBtn" title="Ferma il microfono">⏹️</button>
   </div>
 
+  <!-- D-ID Avatar Embed -->
   <script type="module"
-    src="https://agent.d-id.com/v2/index.js"
-    data-mode="full"
-    data-client-key="YXV0aDB8NjkxNjE4MWJjNWUyZmVmNzU1OTBkZGFkOmx4TlFxOUo2LUJIUWhtc2F3WFpwbQ=="
-    data-agent-id="v2_agt_Yr4DHEpF"
-    data-target-id="avatarContainer">
+          src="https://agent.d-id.com/v2/index.js"
+          data-mode="full"
+          data-client-key="YXV0aDB8NjkxNjE4MWJjNWUyZmVmNzU1OTBkZGFkOmx4TlFxOUo2LUJIUWhtc2F3WFpwbQ=="
+          data-agent-id="v2_agt_Yr4DHEpF"
+          data-name="did-agent"
+          data-monitor="true"
+          data-target-id="avatarContainer">
   </script>
 
   <script src="script.js"></script>

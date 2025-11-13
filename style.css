@@ -1,21 +1,18 @@
-/* Fixed style.css for AI Teacher layout */
-
+/* style.css */
 body {
   margin: 0;
-  font-family: "Inter", sans-serif;
+  font-family: Arial, sans-serif;
   height: 100vh;
   background: #f0f4f8;
   display: flex;
-  flex-direction: column;
 }
 
 .main-container {
-  display: flex;
   flex: 1;
+  display: flex;
   overflow: hidden;
 }
 
-/* Left: Avatar */
 .avatar-section {
   flex: 1;
   background: #fff;
@@ -34,7 +31,6 @@ body {
   background: #000;
 }
 
-/* Right: Math chat */
 .math-section {
   flex: 1.2;
   padding: 20px;
@@ -47,7 +43,6 @@ header h1 {
   margin: 0 0 5px;
   color: #111827;
 }
-
 header p {
   margin: 0 0 15px;
   color: #6b7280;
@@ -65,14 +60,12 @@ header p {
 .message {
   margin-bottom: 12px;
 }
-
 .message strong {
   display: block;
   margin-bottom: 4px;
   color: #2563eb;
 }
 
-/* Microphone buttons */
 .voice-controls {
   position: fixed;
   bottom: 20px;
@@ -89,16 +82,14 @@ header p {
   cursor: pointer;
   color: #fff;
   background: linear-gradient(135deg, #3b82f6, #2563eb);
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.7);
+  box-shadow: 0 0 20px rgba(59,130,246,0.7);
   transition: all 0.2s;
 }
-
 .voice-controls button:active {
   transform: scale(0.95);
 }
 
-/* Responsive for phones */
-@media (max-width: 900px) {
+@media (max-width:900px) {
   .main-container {
     flex-direction: column;
   }
@@ -107,7 +98,7 @@ header p {
     border-bottom: 2px solid #ddd;
   }
   #avatarContainer {
-    max-width: 100%;
-    height: 300px;
+    max-width:100%;
+    height:300px;
   }
 }

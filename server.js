@@ -46,10 +46,18 @@ app.post("/api/ask", async (req, res) => {
     });
 
     const data = await resp.json();
+    console.log("🔍 OpenAI status:", resp.status);
+    console.log("📦 OpenAI body:", JSON.stringify(data, null,2));
+
+    if (!resp.ok) {
+      return res.status(500).json({ reply: "Errore durante la richiesta all'AI." });
+    }
+
     const reply = data?.choices?.[0]?.message?.content?.trim() || "Non ho capito bene.";
     res.json({ reply });
+
   } catch (err) {
-    console.error("❌ Server error while contacting OpenAI:", err);
+    console.error("❌ Server error:", err);
     res.status(500).json({ reply: "Errore durante la richiesta all'AI." });
   }
 });
